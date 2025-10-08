@@ -27,6 +27,7 @@ form.addEventListener("submit", function (event) {
         errorMsg.classList.add("hidden");
         choices.push(value.trim());
         input.value = "";
+        saveChoices();
     }
 });
 
@@ -39,3 +40,15 @@ randomBtn.addEventListener("click", function () {
         result.textContent = " Выбор: " + selected
     }
 });
+
+
+
+
+function saveChoices() {
+    localStorage.setItem("choices", JSON.stringify(choices));
+}
+
+function removeChoices(index) {
+    choices.splice(index, 1);
+    saveChoices();
+}
