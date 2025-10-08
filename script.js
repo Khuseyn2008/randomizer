@@ -11,6 +11,7 @@ let choices = [];
 const savedChoices = localStorage.getItem("choices");
 if (savedChoices) {
     choices = JSON.parse(savedChoices);
+    renderList();
 }
 
 
@@ -28,6 +29,7 @@ form.addEventListener("submit", function (event) {
         choices.push(value.trim());
         input.value = "";
         saveChoices();
+        renderList();
     }
 });
 
@@ -37,11 +39,30 @@ randomBtn.addEventListener("click", function () {
     } else {
         const rand = Math.floor(Math.random() * choices.length);
         const selected = choices[rand];
-        result.textContent = " Выбор: " + selected
+        result.textContent = " Выбор: " + selected;
     }
 });
 
+function renderList() {
+    list.innerHTML = "";
 
+    choices.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.className = "flex justify-between items-center bg-gray-100 px-3 py-2 rounded";
+        const span = document.createElement("span");
+        span.textContent = item;
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "❌";
+        delBtn.className = "text-red-500 hover:text-red-700 text-sm ml-4";
+        delBtn.addEventListener("click", function () {
+        removeChoices(index);
+        });
+
+        li.appendChild(span);
+        li.appendChild(delBtn);  
+        li.appendChild(li); 
+    }); 
+}
 
 
 function saveChoices() {
@@ -51,4 +72,5 @@ function saveChoices() {
 function removeChoices(index) {
     choices.splice(index, 1);
     saveChoices();
+    renderList();
 }
