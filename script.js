@@ -49,19 +49,22 @@ function renderList() {
     choices.forEach((item, index) => {
         const li = document.createElement("li");
         li.className = "flex justify-between items-center bg-gray-100 px-3 py-2 rounded";
+        
         const span = document.createElement("span");
         span.textContent = item;
+        
         const delBtn = document.createElement("button");
         delBtn.textContent = "❌";
         delBtn.className = "text-red-500 hover:text-red-700 text-sm ml-4";
         delBtn.addEventListener("click", function () {
-        removeChoices(index);
+            removeChoices(index);
         });
 
         li.appendChild(span);
-        li.appendChild(delBtn);  
-        li.appendChild(li); 
-    }); 
+        li.appendChild(delBtn);
+
+        list.appendChild(li);
+    });
 }
 
 
