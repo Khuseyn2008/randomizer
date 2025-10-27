@@ -85,9 +85,9 @@ form.addEventListener('submit', (e) => {
     const formValue = optionInput.value.trim();
 
     if (formValue === '') {
-        errorMsg.classList.remove('block', 'hidden');       
+        errorMsg.classList.remove('hidden');       
     } else {
-        errorMsg.classList.add('hidden', 'block');
+        errorMsg.classList.add('block');       
     };
 });
 
